@@ -10,10 +10,11 @@ const storedId=JSON.parse(localStorage.getItem('selectedPlaces'))||[]
 const storedPlaces=storedId.map((id)=>AVAILABLE_PLACES.find((place)=>place.id===id));
 
 function App() {
-  const modal = useRef();
+  // const modal = useRef();
   const selectedPlace = useRef();
   const [availablePlaces,setAvailablePlaces]=useState([])
   const [pickedPlaces, setPickedPlaces] = useState(storedPlaces);
+  const[modalopen,setModalOpen]=useState(false)
 
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition((positon)=>{
@@ -27,12 +28,14 @@ function App() {
     
   },[])
   function handleStartRemovePlace(id) {
-    modal.current.open();
+    // modal.current.open();
+    setModalOpen(true)
     selectedPlace.current = id;
   }
 
   function handleStopRemovePlace() {
-    modal.current.close();
+    // modal.current.close();
+    setModalOpen(false)
   }
 
   function handleSelectPlace(id) {
@@ -61,12 +64,13 @@ function App() {
 
   return (
     <>
-      <Modal ref={modal}>
+    <Modal open={modalopen} onClose={handleStopRemovePlace}>
         <DeleteConfirmation
-          onCancel={handleStopRemovePlace}
-          onConfirm={handleRemovePlace}
-        />
-      </Modal>
+    onCancel={handleStopRemovePlace}
+    onConfirm={handleRemovePlace}
+  />
+    </Modal> 
+      {/* ref={modal} yaha modal ko pehle ref pass kiya tha */}
 
       <header>
         <img src={logoImg} alt="Stylized globe" />
