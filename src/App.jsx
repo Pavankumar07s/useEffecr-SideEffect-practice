@@ -59,7 +59,7 @@ function App() {
     );
     setModalOpen(false)
     const storedId=JSON.parse(localStorage.getItem('selectedPlaces'))||[]
-    localStorage.setItem('selectedPlaces',JSON.stringify(storedId.filter((id)=>id!==selectedPlace.id)))
+    localStorage.setItem('selectedPlaces',JSON.stringify(storedId.filter((id)=>id!==selectedPlace.current)))
   },[])
   
 
