@@ -1,4 +1,4 @@
-export default function Places({ title, places, fallbackText, onSelectPlace }) {
+export default function Places({ title,fallbackText, places,  onSelectPlace }) {
   return (
     <section className="places-category">
       <h2>{title}</h2>
